@@ -138,11 +138,22 @@ public class Parcours {
                 int oldY = this.ptList.get(this.ptList.size()-1).y;
                 //Cherche un y pas trop loin de l ancien, pour la beaute de la courbe
                 int x = this.lastX + rangedRandomInt(30, 100);
-                int y = rangedRandomInt(oldY-range, oldY+range);
+                //int y = rangedRandomInt(oldY-range, oldY+range);
+                int y;
+                if(oldY-range<0){
+                    y = rangedRandomInt(oldY, oldY+range);
+                } else {
+                    y = rangedRandomInt(oldY-range, oldY+range);
+                }
 
                 //Au cas ou y soit depasse les limites de la fenetre ou va trop haut
                 while((y > this.maxY) || (y < 80)){ //On considere que l ovale peut passer avec 80 entre la montagne et le haut de la fenetre
-                    y = rangedRandomInt(y-range, y+range);
+                    //y = rangedRandomInt(y-range, y+range);
+                    if(y < 50){
+                        y = rangedRandomInt(oldY, oldY+range);
+                    } else {
+                        y = rangedRandomInt(oldY-range, oldY);
+                    }
                 }
                 //System.out.println("Sortie de boucle");
                 this.ptList.add(new Point(x,y));
