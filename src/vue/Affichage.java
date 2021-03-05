@@ -386,6 +386,8 @@ public class Affichage extends JPanel {
 
     @Override
     public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.clearRect(0,0, this.getLargeurMap(), this.getHauteurMap());
         super.paint(g);
         g.setColor(new Color(169, 234, 254));
