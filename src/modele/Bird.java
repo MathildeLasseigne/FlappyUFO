@@ -19,7 +19,7 @@ public class Bird extends Thread {
     private int position;
     private int saut = 5;
     /**Temps d attente entre 2 changements d etats**/
-    private int attente;
+    private int bufferEtat;
     private int currentWait;
 
     /**
@@ -56,7 +56,7 @@ public class Bird extends Thread {
         float perc = (this.delais-this.minVit)/comp;//On prend l etat d attente en fonction du % du delais par rapport au delais autorise
         int att = Math.round((perc*1000)*(this.delais)); //On multiplie perc pour ralentir encore les plus rapides
         //this.attente = att*10;
-        this.attente = Math.round((this.maxVit-this.delais)/(this.maxVit - this.minVit)*4);
+        this.bufferEtat = Math.round((this.maxVit-this.delais)/(this.maxVit - this.minVit)*4);
         this.currentWait = 0;
     }
 
@@ -98,7 +98,7 @@ public class Bird extends Thread {
      * </br> Plus la vitesse est rapide, plus les changements d etat sont lents
      */
     private void nextEtat(){
-        if(this.currentWait == this.attente){
+        if(this.currentWait == this.bufferEtat){
             this.currentWait = 0;
             if(this.etat == 8){
                 this.etat = 1;
